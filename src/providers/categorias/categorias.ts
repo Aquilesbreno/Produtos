@@ -21,10 +21,24 @@ export class CategoriasProvider {
   get(){
 
   }
-  save(){
+  save(categoriaForm: any){
+    const categoria ={
+      name: categoriaForm.name,
+      description: categoriaForm.description
+    }
+
+    if (categoriaForm.key){
+
+      //editar um existente
+    } else{
+
+      //salvar um novo
+      this.db.list(this.PATH).push(categoria);
+    }
 
   }
-  remove(){
+  remove(categoriakey:string){
+    this.db.list(this.PATH).remove(categoriakey);
 
   }
 
