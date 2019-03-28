@@ -1,9 +1,7 @@
-import { CategoriasEditaPage } from './../categorias-edita/categorias-edita';
-import { CategoriasProvider } from './../../../providers/categorias/categorias';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { CategoriasProvider } from './../../../providers/categorias/categorias';
 import { Observable } from 'rxjs/Observable';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @IonicPage()
 @Component({
@@ -18,7 +16,7 @@ export class CategoriasListaPage {
      private toast: ToastController,
      private categoriasProvider: CategoriasProvider
      ) {
-       this.categorias = this.categoriasProvider.getAll();
+       this.categorias = this.categoriasProvider.getALL();
   }
 
   ionViewDidLoad() {
@@ -31,8 +29,7 @@ export class CategoriasListaPage {
   }
 
   editItemCategoria(categoria:any){
-    this.navCtrl.push('CategoriasEditPage', {categoriakey: categoria.key} );
-
+    this.navCtrl.push('CategoriasEditaPage', {categoriakey: categoria.key} );
   }
 
 removeItemCategoria(key:string){

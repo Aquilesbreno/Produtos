@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriasProvider } from './../../../providers/categorias/categorias';
 
 
-
 @IonicPage()
 @Component({
   selector: 'page-categorias-edita',
@@ -24,6 +23,13 @@ export class CategoriasEditaPage {
       this.categoria = this.navParams.data.categoriakey  || {}
       this.SetupPageTitle();
       this.createForm();
+
+      const subscribe = this.categoriaProvider.get(this.navParams.data.categoriakey).subscribe(categoriaData =>{
+        subscribe.unsubscribe();
+        this.categoria = categoriaData;
+        this.createForm();
+      })
+
   }
 
   private SetupPageTitle(){

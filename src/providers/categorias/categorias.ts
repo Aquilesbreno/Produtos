@@ -1,26 +1,31 @@
-
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import 'rxjs/add/operator/map';
 
+
 @Injectable()
 export class CategoriasProvider {
-  private PATH= 'categorias/';
+  private PATH='categorias/';
 
-  constructor(private db: AngularFireDatabase) {
-
+  constructor(private db:AngularFireDatabase) {
   }
-  public getAll(){
+
+  public getALL(){
     return this.db.list(this.PATH)
+      .snapshotChanges()
+      .map(changes =>{
+        return changes.map(m=> ({ key: m.key, ...m.payload.val() }))
+      })
+  }
+
+  get(categoriaKey:string){
+    return this.db.object(this.PATH + categoriaKey)
     .snapshotChanges()
-    .map(changes => {
-      return changes.map (m=> ({key: m.key, ...m.payload.val()  }));
+    .map(m => {
+      return { key: m.key, ...m.payload.val()};
     });
-
   }
-  get(){
 
-  }
   save(categoriaForm: any){
     const categoria ={
       name: categoriaForm.name,
@@ -28,19 +33,16 @@ export class CategoriasProvider {
     }
 
     if (categoriaForm.key){
-
-      //editar um existente
-    } else{
-
-      //salvar um novo
+      this.db.list(this.PATH)
+      .update(categoriaForm.key, categoria);
+    } else {
       this.db.list(this.PATH).push(categoria);
     }
 
   }
-  remove(categoriakey:string){
-    this.db.list(this.PATH).remove(categoriakey);
 
+  remove(categoriaKey:string){
+    this.db.list(this.PATH).remove(categoriaKey);
   }
-
 
 }
