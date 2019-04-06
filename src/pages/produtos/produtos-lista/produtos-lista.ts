@@ -1,12 +1,9 @@
+import { Observable } from 'rxjs/Observable';
+import { ProdutosProvider } from './../../../providers/produtos/produtos';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ProdutosListaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -14,12 +11,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'produtos-lista.html',
 })
 export class ProdutosListaPage {
+  produtos: Observable<any[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private produtosProvider: ProdutosProvider) {
+
+                this.produtos = this.produtosProvider.getAll();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProdutosListaPage');
+  newItemProdutos(){ // push é método que chama/abre uma página
+                     // o nome da page vc vê na classe da Page
+    this.navCtrl.push('ProdutosEditaPage');
   }
+
 
 }

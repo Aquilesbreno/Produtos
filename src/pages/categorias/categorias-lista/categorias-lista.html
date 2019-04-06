@@ -9,7 +9,7 @@
     <ion-item-sliding *ngFor="let categoria of categorias | async">
       <ion-item>
         <h3>{{ categoria.name}}</h3>
-        <p>{{ categoria.key}}</p>
+
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="secondary" (click)="editItemCategoria(categoria)"><ion-icon name="create"></ion-icon>Editar</button>

@@ -16,7 +16,7 @@ export class CategoriasListaPage {
      private toast: ToastController,
      private categoriasProvider: CategoriasProvider
      ) {
-       this.categorias = this.categoriasProvider.getALL();
+       this.categorias = this.categoriasProvider.getAll();
   }
 
   ionViewDidLoad() {

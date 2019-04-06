@@ -51,6 +51,8 @@ export class CategoriasEditaPage {
 
 
  }
+
+
  onSubmit(){
    if (this.form.valid){
             this.categoriaProvider.save(this.form.value);
@@ -62,8 +64,6 @@ export class CategoriasEditaPage {
    this.navCtrl.pop();
 
  }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CategoriasEditaPage');
-  }
+
 
 }

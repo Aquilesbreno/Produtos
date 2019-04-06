@@ -10,7 +10,7 @@ export class CategoriasProvider {
   constructor(private db:AngularFireDatabase) {
   }
 
-  public getALL(){
+  public getAll(){
     return this.db.list(this.PATH)
       .snapshotChanges()
       .map(changes =>{
