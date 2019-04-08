@@ -34,7 +34,18 @@ categoriaItem:any;
 
               this.SetupPageTitle();
               this.createForm();
+              //buscar todas as categorias
               this.loadCategorias();
+
+
+              const subscribe = this.produtosProvider.get(this.navParams.data.produtokey).subscribe((produtosData: any) =>{
+
+                subscribe.unsubscribe();
+                  this.produtos = produtosData;
+                  console.log(this.produtos);
+                  this.createForm();
+
+              });
 
   }
 

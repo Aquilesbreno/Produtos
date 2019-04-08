@@ -58,7 +58,7 @@ export class ProdutosProvider {
       .map(changes =>{
         return changes.map(m=> ({ key: m.key, ...m.payload.val() }))
       })
-  }
+  }*/
 
   get(produtoKey:string){
     return this.db.object(this.PATH + produtoKey)
@@ -68,24 +68,7 @@ export class ProdutosProvider {
     });
   }
 
-  save(produtoForm: any){
-    const produto ={
-      name: produtoForm.name,
-      description: produtoForm.description
-    }
 
-    if (produtoForm.key){
-      this.db.list(this.PATH)
-      .update(produtoForm.key, produto);
-    } else {
-      this.db.list(this.PATH).push(produto);
-    }
-
-  }
-
-  remove(produtoKey:string){
-    this.db.list(this.PATH).remove(produtoKey);
-  }*/
 
   uploadImg(key: string, file: File) {
     const storageRef = this.fb.storage().ref();              // put(file) adicionando o arquivo
@@ -109,7 +92,9 @@ export class ProdutosProvider {
     );
   }
 
-  remove(produtokey: string, removeImg: boolean) {
+  //remove(produtokey: string, removeImg: boolean) {
+    remove(produtokey: string, removeImg: boolean) {
+      removeImg= false;
     this.db.list(this.PATH).remove(produtokey).then(() => {
       if (removeImg) {
         this.removeImg(produtokey);
@@ -126,13 +111,6 @@ export class ProdutosProvider {
     this.removeImg(produtokey);
     this.db.object(this.PATH + produtokey).update({ imgUrl: '' });
   }
-
-
-
-
-
-
-
 
 
 
